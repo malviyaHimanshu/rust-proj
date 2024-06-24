@@ -1,7 +1,7 @@
 use serde::{Deserialize, Serialize};
 use std::fs;
 
-use crate::{encrypt_password, decrypt_password};
+// use crate::{encrypt_password, decrypt_password};
 
 // data file where passwords will be stored
 const DATA_FILE: &str = "password.json";
@@ -38,8 +38,9 @@ impl PasswordManager {
     }
 
     pub fn add_entry(&mut self, service: String, username: String, password: String) {
-        let encrypted_password = encrypt_password(&password);
-        let entry = PasswordEntry { service, username, password: encrypted_password };
+        // TODO: encrypt the password first
+        // let encrypted_password = encrypt_password(&password);
+        let entry = PasswordEntry { service, username, password };
         self.entries.push(entry);
     }
 
@@ -48,9 +49,10 @@ impl PasswordManager {
     }
 
     pub fn list_entries(&self) {
-        println!("Service\t\t\tUsername\t\t\tPassword");
+        println!("\n{0: ^20} | {1: ^20} | {2: ^20}", "service", "username", "password");
         for entry in &self.entries {
-            println!("{}\t\t\t{}\t\t\t{}", entry.service, entry.username, decrypt_password(&entry.password));
+            // TODO: decrypt the password
+            println!("{0: <20} | {1: <20} | {2: <20}", entry.service, entry.username, entry.password);
         }
     }
 }
