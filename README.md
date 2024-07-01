@@ -9,3 +9,4 @@ A repository of beginner friendly projects for learning rust-lang.
 | 4     | [text formatter](./rust-text-formatter/)     | a cli application which performs formatting operation on a text file |
 | 5     | [currency converter](./rust-currency-converter/)     | a cli currency conversion application |
 | 6     | [password manager](./rust-password-manager/)     | a cli based local password manager application  |
+| 7     | [http server](./rust-http-server/)     | a custom http server which serves html page  |
