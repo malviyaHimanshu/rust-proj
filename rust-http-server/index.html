@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Coming Soon</title>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <style>
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        @keyframes slideIn {
+            from { transform: translateY(100px); opacity: 0; }
+            to { transform: translateY(0); opacity: 1; }
+        }
+
+        .fade-in {
+            animation: fadeIn 2s ease-in-out;
+        }
+
+        .slide-in {
+            animation: slideIn 1s ease-out;
+        }
+
+        .countdown {
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+        }
+
+        .countdown div {
+            background: rgba(255, 255, 255, 0.25);
+            backdrop-filter: blur(10px);
+            border-radius: 10px;
+            padding: 20px;
+            text-align: center;
+        }
+
+        .countdown div span {
+            display: block;
+            font-size: 2rem;
+            color: white;
+        }
+
+        .countdown div small {
+            display: block;
+            font-size: 1rem;
+            color: white;
+            margin-top: 5px;
+        }
+    </style>
+</head>
+<body class="bg-gradient-to-r from-blue-500 via-purple-500 to-pink-500 h-screen flex items-center justify-center">
+    <div class="text-center p-24 bg-white bg-opacity-25 rounded-xl shadow-lg backdrop-blur-md fade-in">
+        <h1 class="text-5xl font-bold text-white slide-in">Coming Soon</h1>
+        <p class="mt-4 mb-8 text-lg text-white slide-in" style="animation-delay: 0.5s; animation-fill-mode: both;">This is all the time you have left in year 2024, build something you love.</p>
+        <div id="countdown" class="countdown mt-6 slide-in" style="animation-delay: 1.5s; animation-fill-mode: both;"></div>
+    </div>
+
+    <script>
+        const countdownElement = document.getElementById('countdown');
+        const targetDate = new Date('January 1, 2025 00:00:00').getTime();
+
+        function updateCountdown() {
+            const now = new Date().getTime();
+            const distance = targetDate - now;
+
+            const days = Math.floor(distance / (1000 * 60 * 60 * 24));
+            const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+            const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+            const seconds = Math.floor((distance % (1000 * 60)) / 1000);
+
+            countdownElement.innerHTML = `
+                <div>
+                    <span>${days}</span>
+                    <small>Days</small>
+                </div>
+                <div>
+                    <span>${hours}</span>
+                    <small>Hours</small>
+                </div>
+                <div>
+                    <span>${minutes}</span>
+                    <small>Minutes</small>
+                </div>
+                <div>
+                    <span>${seconds}</span>
+                    <small>Seconds</small>
+                </div>
+            `;
+
+            if (distance < 0) {
+                clearInterval(countdownInterval);
+                countdownElement.innerHTML = "Happy New Year! 🎉";
+            }
+        }
+
+        const countdownInterval = setInterval(updateCountdown, 1000);
+        updateCountdown();
+    </script>
+</body>
+</html>
