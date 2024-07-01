@@ -1,5 +1,6 @@
 use std::{fs, io::{Read, Write}, net::{TcpListener, TcpStream}};
 
+// TODO: add routings, POST and other methods as well
 fn handle_connection(mut stream: TcpStream) {
     let mut buffer = [0; 1024];
     // update buffer by incoming request data
